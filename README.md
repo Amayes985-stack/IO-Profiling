@@ -43,22 +43,23 @@ This project was developed during my internship and aims to analyze energy consu
 The project is organized as follows:
 
 ```
-├── benchmark.sh            # Script for running IO benchmarks
-├── format.sh               # Script for formatting and processing raw data
-├── plotting.sh             # Script for plotting raw data
-├── logs/                   # Directory containing raw and processed data files
-├── scripts/                # Directory containing all Python and Shell scripts
-│   ├── plot/               # Directory containing scripts for plotting
-│       └── ...
-│   ├── format/             # Directory containing scripts for formatting
-│       └── ...
-│   ├── math/               # Directory containing scripts for mathematical computations
-│       └── normalize.py    # Script to calculate normalized offsets
-│       └── frequency.py    # Script to display frequency distributions
-│       └── ...             
-│   └── IOR/                # Directory containing IOR-related tools
-│       └── iortest1.c      # C program based on iotest with IOR trace functionality
-│       └── filter_traces.c # C program for filtering IOR traces
+├── Makefile                  # Automation script for various tasks
+├── benchmark.sh            # Script for running IO benchmarks
+├── format.sh               # Script for formatting and processing raw data
+├── plotting.sh             # Script for plotting raw data
+├── logs/                   # Directory containing raw and processed data files
+├── scripts/                # Directory containing all Python and Shell scripts
+│   ├── plot/               # Directory containing scripts for plotting
+│       └── ...
+│   ├── format/             # Directory containing scripts for formatting
+│       └── ...
+│   ├── math/               # Directory containing scripts for mathematical computations
+│       └── normalize.py    # Script to calculate normalized offsets
+│       └── frequency.py    # Script to display frequency distributions
+│       └── ...             
+│   └── IOR/                # Directory containing IOR-related tools
+│       └── iortest1.c      # C program based on iotest with IOR trace functionality
+│       └── filter_traces.c # C program for filtering IOR traces
 ├── README.md
 ```
 
@@ -68,7 +69,7 @@ The project is organized as follows:
 
 ### Example: Compiling and Running iotest.c
 
-The iotest.c file is a C program used to simulate IO operations. The associated header file, iotest.h, contains the definitions and functions used within the iotest.c file.
+The `iotest.c` file is a C program used to simulate IO operations. The associated header file, `iotest.h`, contains the definitions and functions used within the `iotest.c` file.
 
 #### Compiling iotest.c
 
@@ -80,17 +81,17 @@ This command compiles the C code and creates an executable named `iotest`.
 
 ### Running the iotest Benchmark
 
-The benchmark.sh script is used to run IO operations and measure energy consumption. Here's an example of how to run the benchmark:
+The `benchmark.sh` script is used to run IO operations and measure energy consumption. Here's an example of how to run the benchmark:
 
 ```bash
 sudo-g5k ./benchmark.sh READ RAND HDD
 ```
 
-This script runs the IO benchmark with specified parameters (READ or WRITE mode, RANDOM or SEQUENTIAL (RAND or SEQ) access pattern, HDD or SSD storage type) and stores the results in the `logs/` directory.
+This script runs the IO benchmark with specified parameters (**READ** or **WRITE** mode, **RANDOM** or **SEQUENTIAL** (RAND or SEQ) access pattern, **HDD** or **SSD** storage type) and stores the results in the `logs/` directory.
 
-### Running the ior_bench.sh Benchmark
+### Running the ior\_bench.sh Benchmark
 
-The ior_bench.sh script is a specialized benchmark for measuring energy consumption using iortest1.c. It's designed to test different read/write ratios and file sizes, and it captures energy data directly via the Grid5000 API.
+The `ior_bench.sh` script is a specialized benchmark for measuring energy consumption using `iortest1.c`. It's designed to test different read/write ratios and file sizes, and it captures energy data directly via the Grid5000 API.
 
 #### Execution Command
 
@@ -108,7 +109,7 @@ For example, to run the benchmark on an HDD:
 
 ### Plotting Script (plotting.sh)
 
-The plotting.sh script is used to generate various plots from the benchmark results. It supports different types of plots, such as baseline plots, boxplots, and IO energy consumption plots.
+The `plotting.sh` script is used to generate various plots from the benchmark results. It supports different types of plots, such as baseline plots, boxplots, and IO energy consumption plots.
 
 #### Usage Example:
 
@@ -116,9 +117,9 @@ The plotting.sh script is used to generate various plots from the benchmark resu
 ./plotting.sh <log_dir> <type> [<optional_arg>]
 ```
 
-- `log_dir`: The directory containing log files at the base of the logs (see example below).  
-- `type`: The type of plot to generate (e.g., baseline or sz_bloc).  
-- `optional_arg`: An optional argument to specify additional options (e.g., nb_run).  
+  - `log_dir`: The directory containing log files (e.g., `logs/HDD/READ/RAND/`).
+  - `type`: The type of plot to generate (e.g., `baseline` or `sz_bloc`).
+  - `optional_arg`: An optional argument to specify additional options (e.g., `nb_run`).
 
 For example, to generate ALL plot for all runs per iteration:
 
@@ -132,14 +133,14 @@ For example, to generate ALL plot for all runs per iteration:
 
 ### iotest.c and iotest.h
 
-- **iotest.c**: This C program simulates IO operations by reading and writing data to a storage device.  
-- **iotest.h**: The header file contains function prototypes, macros, and structure definitions used in iotest.c.
+  - **iotest.c**: This C program simulates IO operations by reading and writing data to a storage device.
+  - **iotest.h**: The header file contains function prototypes, macros, and structure definitions used in iotest.c.
 
 ### benchmark.sh
 
 Automates the process of running IO benchmarks on different storage devices.
 
-### ior_bench.sh
+### ior\_bench.sh
 
 Automates running IO benchmarks on different storage devices using the **IOR library**.
 
@@ -149,7 +150,7 @@ Generates visual plots of the energy consumption data collected during the bench
 
 ### format.sh
 
-Organizes and formats raw data collected during IO tests.  
+Organizes and formats raw data collected during IO tests.
 
 #### Usage
 
@@ -163,19 +164,19 @@ Organizes and formats raw data collected during IO tests.
 
 #### scripts/IOR/
 
-- **iortest1.c**: Modified iotest.c including IOR trace functionality.  
-- **filter_traces.c**: Parses raw trace data and formats it for replay.
+  - **iortest1.c**: Modified `iotest.c` including IOR trace functionality.
+  - **filter\_traces.c**: Parses raw trace data and formats it for replay.
 
 #### scripts/math/
 
-- **normalize.py**: Calculates normalized offsets for IO operations.  
-- **frequency.py**: Displays the frequency distribution of IO requests.
+  - **normalize.py**: Calculates normalized offsets for IO operations.
+  - **frequency.py**: Displays the frequency distribution of IO requests.
 
 -----
 
 ## Guide to Installing and Using IOR for I/O Performance Analysis
 
-### 1. Environment Setup
+### 1\. Environment Setup
 
 Interactive node reservation using OAR:
 
@@ -189,7 +190,7 @@ oarsub -I -l host=1,walltime=7:00 -q default -p taurus -t deploy
 kadeploy3 debian11-big
 ```
 
-### 2. Installing Dependencies
+### 2\. Installing Dependencies
 
 ```bash
 apt-get update
@@ -198,7 +199,7 @@ apt-get install -y libnetcdf-dev libhdf5-dev libpnetcdf-dev
 apt-get install -y m4 make gcc texinfo
 ```
 
-### 3. Installing IOR
+### 3\. Installing IOR
 
 #### 3.1 Updating Autoconf
 
@@ -225,29 +226,93 @@ MPICC=mpicc ./configure --with-hdf5=/usr --with-ncmpi
 make
 ```
 
-### 4. Running IOR Benchmarks
+### 4\. Running IOR Benchmarks
 
 ```bash
 export OMPI_ALLOW_RUN_AS_ROOT=1
 export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
-mpirun -np 1 ~/ior/src/ior   -a POSIX   -b 256m -s 1 -t 512   -w -i 1   -o ior_256M_testfile   -k
+mpirun -np 1 ~/ior/src/ior -a POSIX -b 256m -s 1 -t 512 -w -i 1 -o ior_256M_testfile -k
 ```
 
-### 5. Capturing an I/O Trace with strace
+### 5\. Capturing an I/O Trace with strace
 
 ```bash
-strace -yy -f -e trace=read,write,lseek,open,openat,creat,close,unlink   mpirun -np 1 ~/ior/src/ior     -a POSIX -b 256m -s 1 -t 512     -r -i 1 -o ior_256M_testfile -k -z     > trace.log 2>&1
+strace -yy -f -e trace=read,write,lseek,open,openat,creat,close,unlink mpirun -np 1 ~/ior/src/ior -a POSIX -b 256m -s 1 -t 512 -r -i 1 -o ior_256M_testfile -k -z > trace.log 2>&1
 ```
 
-### 6. Filtering and Formatting the Trace
+### 6\. Filtering and Formatting the Trace
 
 ```bash
 gcc -o filter_trace filter_trace.c
 ./filter_trace trace.log > filtered_trace.txt
 ```
 
-### 7. Replaying the Captured Trace
+### 7\. Replaying the Captured Trace
 
 ```bash
 ./iortest_replay_fixed --mode replay --trace-file filtered_trace.txt --data-file /path/to/datafile
 ```
+
+-----
+
+## Makefile Explained
+
+This project includes a **Makefile** to automate common tasks such as compiling, running benchmarks, plotting results, and managing the environment on Grid5000. Using `make` simplifies the workflow and ensures consistency.
+
+-----
+
+### **Compilation and Running `iotest`**
+
+  - `make compile_iotest`: Compiles the C program `iotest.c` to create an executable.
+    ```makefile
+    compile_iotest:
+        gcc -g iotest.c -o iotest -lm
+    ```
+  - `make run_iotest`: Runs a single instance of the `iotest` benchmark with a specific configuration (READ, 10 runs, 1 block, 1MB block size, 256MB file size).
+    ```makefile
+    run_iotest:
+        sudo-g5k ./iotest --mode read --nb_run 10 --nb_bloc 1 --sz_bloc 1M --filesize 256M
+    ```
+
+-----
+
+### **Benchmark Execution**
+
+These targets run the main `benchmark.sh` script with different configurations for HDD and SSD, for both sequential and random access patterns, and for both read and write operations.
+
+  - `make benchmark_taurus_HDD_RAND_READ`: Runs a random read benchmark on an HDD.
+  - `make benchmark_taurus_HDD_SEQ_READ`: Runs a sequential read benchmark on an HDD.
+  - `make benchmark_gros_SSD_RAND_READ`: Runs a random read benchmark on an SSD.
+  - `make benchmark_gros_SSD_SEQ_READ`: Runs a sequential read benchmark on an SSD.
+  - `make benchmark_taurus_HDD_RAND_WRITE`: Runs a random write benchmark on an HDD.
+  - `make benchmark_taurus_HDD_SEQ_WRITE`: Runs a sequential write benchmark on an HDD.
+  - `make benchmark_gros_SSD_RAND_WRITE`: Runs a random write benchmark on an SSD.
+  - `make benchmark_gros_SSD_SEQ_WRITE`: Runs a sequential write benchmark on an SSD.
+
+-----
+
+### **Grid5000 Reservations**
+
+These targets simplify the process of reserving nodes on Grid5000.
+
+  - `make reservation_taurus_short`: Reserves 2 Taurus hosts for 2 hours with power monitoring enabled.
+  - `make reservation_taurus_long`: Reserves 4 Taurus hosts for 12 hours with power monitoring enabled.
+  - `make ior_bench_reservation_taurus`: Reserves a single Taurus host for 1 hour and 45 minutes for IOR benchmarks.
+
+-----
+
+### **Data Processing and Plotting**
+
+These targets automate the plotting of benchmark results. They generate different types of plots (baseline, all, boxplots) to visualize the data.
+
+  - `make plotting_HDD_READ_RAND`: Generates various plots for the random read HDD benchmark.
+  - `make plotting_HDD_READ_SEQ`: Generates various plots for the sequential read HDD benchmark.
+  - `make plotting_HDD_WRITE_RAND`: Generates various plots for the random write HDD benchmark.
+  - `make plotting_HDD_WRITE_SEQ`: Generates various plots for the sequential write HDD benchmark.
+  - `make format_HDD`: Formats the raw log data for the HDD.
+  - `make plot_deltas_READ`: Plots the power delta (change in power consumption) for all read tests.
+  - `make plot_deltas_WRITE`: Plots the power delta for all write tests.
+  - `make apply_means_READ`: Calculates the mean power for all read tests.
+  - `make apply_means_WRITE`: Calculates the mean power for all write tests.
+  - `make calcul_HDD_READ`: Calculates energy consumption for the HDD read benchmarks using `calcul_hdd.py`.
+  - `make calcul_HDD_WRITE`: Calculates energy consumption for the HDD write benchmarks.
