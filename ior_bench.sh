@@ -7,7 +7,7 @@ io_size=512  # 512 bytes
 # Define number of blocks (sequential)
 nb_bloc=16
 # Configurations for Read/Write ratios
-configurations=("25:75" "50:50" "75:25")
+configurations=("100:0 , 0:100)
 # Storage type and paths
 storage_type=$1
 path="logs/${storage_type}/IOR"
