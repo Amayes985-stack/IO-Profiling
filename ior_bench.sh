@@ -34,13 +34,13 @@ for config in "${configurations[@]}"; do
 
       # Write operations
       if [ $write_ratio -gt 0 ]; then
-        mpirun -np 1 ./src/ior -a POSIX -b $file_size -t $io_size -w -s $nb_bloc -i $((write_ratio / 25)) -o ior_test_file_${config}_${file_size} -k
+        mpirun -np 1 ./src/ior -a POSIX -b $file_size -t $io_size -w -s $nb_bloc -i $((write_ratio / 100)) -o ior_test_file_${config}_${file_size} -k
         sync  # Ensure the data is fully written to disk
       fi
 
       # Read operations
       if [ $read_ratio -gt 0 ]; then
-        mpirun -np 1 ./src/ior -a POSIX -b $file_size -t $io_size -r -s $nb_bloc -i $((read_ratio / 25)) -o ior_test_file_${config}_${file_size}
+        mpirun -np 1 ./src/ior -a POSIX -b $file_size -t $io_size -r -s $nb_bloc -i $((read_ratio / 100)) -o ior_test_file_${config}_${file_size}
       fi
 
       # Log end timestamp after the I/O operations
